@@ -2,46 +2,54 @@
 
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
-import { Download, FileText, Maximize2 } from "lucide-react";
+import { Download, FileText, Maximize2, Briefcase, GraduationCap, Code, Mail, Phone, Linkedin, MapPin, Award, Star } from "lucide-react";
 import { MarkdownEditor } from "@/components/markdown-editor";
 import { ResumePreview } from "@/components/resume-preview";
 import { themes as resumeThemes } from "@/lib/themes";
 import html2canvas from 'html2canvas';
 import jsPDF from 'jspdf';
 
-const defaultMarkdown = `# John Doe
-## Contact
-- Email: john@example.com
-- Phone: (123) 456-7890
-- LinkedIn: linkedin.com/in/johndoe
+const defaultMarkdown = `# 👨‍💻 John Doe
 
-## Summary
-Experienced software developer with a passion for creating efficient and scalable solutions.
+## 📱 Contact
+- 📧 Email: john@example.com  
+- 📞 Phone: (123) 456-7890
+- 🔗 LinkedIn: linkedin.com/in/johndoe
+- 📍 Location: New York, NY
 
-## Experience
-**Senior Software Engineer at Tech Corp**
+## ✨ Summary
+Passionate and innovative software developer with expertise in creating efficient and scalable solutions. Strong problem-solving abilities and a track record of delivering high-impact projects.
+
+## 💼 Experience
+**🚀 Senior Software Engineer at Tech Corp**
 *2020 - Present*
-- Led development of microservices architecture
-- Mentored junior developers
-- Improved system performance by 40%
+- 🎯 Led development of cutting-edge microservices architecture
+- 👥 Mentored junior developers and fostered team growth
+- 📈 Improved system performance by 40% through optimization
 
-**Software Developer at StartUp Inc**
+**💻 Software Developer at StartUp Inc**
 *2018 - 2020*
-- Developed full-stack web applications
-- Implemented CI/CD pipelines
-- Reduced deployment time by 60%
+- ⚡ Developed robust full-stack web applications
+- 🔄 Implemented automated CI/CD pipelines
+- ⚙️ Reduced deployment time by 60% through process improvements
 
-## Education
-**Bachelor of Science in Computer Science**
+## 🎓 Education
+**🏛️ Bachelor of Science in Computer Science**
 *University of Technology | 2014 - 2018*
-- GPA: 3.8/4.0
-- Dean's List: All semesters
+- 🏆 GPA: 3.8/4.0
+- 🌟 Dean's List: All semesters
+- 📚 Research Assistant in AI Lab
 
-## Skills
-- Languages: JavaScript, TypeScript, Python
-- Frameworks: React, Node.js, Express
-- Tools: Git, Docker, AWS
-- Soft Skills: Leadership, Communication, Problem-solving`;
+## 🛠️ Skills
+- 💻 Languages: JavaScript, TypeScript, Python
+- ⚛️ Frameworks: React, Node.js, Express
+- 🔧 Tools: Git, Docker, AWS, Kubernetes
+- 🤝 Soft Skills: Leadership, Communication, Problem-solving
+
+## 🏆 Achievements
+- 🥇 Best Innovation Award 2022
+- 📜 AWS Certified Solutions Architect
+- 🌟 3x Employee of the Month`;
 
 export default function EditorPage() {
   const [markdown, setMarkdown] = useState(defaultMarkdown);
@@ -79,21 +87,25 @@ export default function EditorPage() {
   };
 
   return (
-    <main className="min-h-screen bg-gray-50 dark:bg-gray-900">
+    <main className="min-h-screen bg-white dark:bg-black">
       <div className="container mx-auto px-6 py-12">
         <div className="flex flex-col md:flex-row justify-between items-center mb-12 gap-6">
-          <div className="transition-all duration-300 hover:scale-105">
-            <h1 className="text-4xl md:text-5xl font-bold text-gray-900 dark:text-white mb-2">
-              Resume Editor
-            </h1>
-            <p className="text-gray-600 dark:text-gray-400">
+          <div className="transition-all duration-300 ">
+            <div className="flex items-center gap-3 mb-2">
+              <Star className="w-8 h-8 text-black dark:text-white" />
+              <h1 className="text-4xl md:text-5xl font-bold text-black dark:text-white">
+                Resume Editor
+              </h1>
+            </div>
+            <p className="text-gray-600 dark:text-gray-400 flex items-center gap-2">
+              <Award className="w-5 h-5 text-black dark:text-white" />
               Create your professional resume with our beautiful themes
             </p>
           </div>
           <div className="flex gap-4 items-center">
-            <div className="relative transition-transform duration-300 hover:scale-105">
+            <div className="relative transition-transform duration-300 ">
               <select
-                className="appearance-none bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-lg pl-4 pr-10 py-2 text-gray-900 dark:text-white cursor-pointer focus:outline-none focus:ring-2 focus:ring-purple-500 transition-colors duration-300"
+                className="appearance-none bg-white dark:bg-black border border-gray-200 dark:border-gray-800 rounded-lg pl-4 pr-10 py-2 text-black dark:text-white cursor-pointer focus:outline-none focus:ring-2 focus:ring-black dark:focus:ring-white"
                 value={selectedTheme}
                 onChange={(e) => setSelectedTheme(e.target.value)}
                 style={{
@@ -108,14 +120,14 @@ export default function EditorPage() {
                 ))}
               </select>
               <div className="absolute inset-y-0 right-0 flex items-center pr-3 pointer-events-none">
-                <svg className="h-4 w-4 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <svg className="h-4 w-4 text-black dark:text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19 9l-7 7-7-7" />
                 </svg>
               </div>
             </div>
             <Button 
               onClick={handleExport}
-              className="bg-gray-900 dark:bg-white text-white dark:text-gray-900 px-4 py-2 rounded-lg flex items-center gap-2 transition-all duration-300 hover:scale-110 hover:shadow-lg"
+              className="bg-black dark:bg-white text-white dark:text-black px-4 py-2 rounded-lg flex items-center gap-2 transition-all duration-300 "
             >
               <Download className="w-4 h-4" />
               Export PDF
@@ -124,28 +136,28 @@ export default function EditorPage() {
         </div>
 
         <div className={`grid ${isPreviewExpanded ? '' : 'md:grid-cols-2'} gap-6 transition-all duration-500 ease-in-out`}>
-          <div className={`bg-white dark:bg-gray-800 h-full overflow-hidden rounded-lg shadow-lg p-3 ${isPreviewExpanded ? 'hidden' : ''} transition-all duration-300 hover:shadow-xl`}>
+          <div className={`bg-white dark:bg-black h-full overflow-hidden rounded-lg shadow-lg p-6 ${isPreviewExpanded ? 'hidden' : ''} transition-all duration-300 hover:shadow-xl border border-gray-200 dark:border-gray-800`}>
             <div className="flex items-center gap-3 mb-6">
-              <FileText className="w-5 h-5 text-gray-900 dark:text-white transition-transform duration-300 hover:scale-110" />
-              <h2 className="text-xl font-semibold text-gray-900 dark:text-white">
+              <Code className="w-6 h-6 text-black dark:text-white" />
+              <h2 className="text-xl font-semibold text-black dark:text-white">
                 Markdown Editor
               </h2>
             </div>
             <MarkdownEditor value={markdown} onChange={setMarkdown} />
           </div>
 
-          <div className="bg-white dark:bg-gray-800 rounded-lg shadow-lg p-3 h-full overflow-hidden transition-all duration-300 hover:shadow-xl">
+          <div className="bg-white dark:bg-black rounded-lg shadow-lg p-6 h-full overflow-hidden transition-all duration-300 hover:shadow-xl border border-gray-200 dark:border-gray-800">
             <div className="flex items-center justify-between mb-6">
               <div className="flex items-center gap-3">
-                <FileText className="w-5 h-5 text-gray-900 dark:text-white transition-transform duration-300 hover:scale-110" />
-                <h2 className="text-xl font-semibold text-gray-900 dark:text-white">
+                <FileText className="w-6 h-6 text-black dark:text-white" />
+                <h2 className="text-xl font-semibold text-black dark:text-white">
                   Preview
                 </h2>
               </div>
               <Button 
                 variant="ghost"
                 onClick={togglePreview}
-                className="text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white transition-all duration-300 hover:scale-110"
+                className="text-black dark:text-white hover:text-gray-700 dark:hover:text-gray-300 transition-all duration-300 hover:scale-110"
               >
                 <Maximize2 className="w-4 h-4 mr-2 transition-transform duration-300" />
                 {isPreviewExpanded ? 'Küçült' : 'Büyült'}

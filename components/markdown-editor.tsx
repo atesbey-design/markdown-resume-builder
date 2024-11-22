@@ -2,7 +2,8 @@
 
 import { Textarea } from "@/components/ui/textarea";
 import { Button } from "@/components/ui/button";
-import { Bold, Italic, List, Heading } from "lucide-react";
+import { Bold, Italic, List, Heading, Mail, Phone, MapPin, Briefcase, GraduationCap, Award, Star, Code, FileText, Download, Maximize2, Linkedin } from "lucide-react";
+import { useState } from "react";
 
 interface MarkdownEditorProps {
   value: string;
@@ -10,6 +11,27 @@ interface MarkdownEditorProps {
 }
 
 export function MarkdownEditor({ value, onChange }: MarkdownEditorProps) {
+  const [showIconsDropdown, setShowIconsDropdown] = useState(false);
+
+  const icons = {
+    mail: Mail,
+    phone: Phone,
+    mapPin: MapPin,
+    briefcase: Briefcase,
+    graduationCap: GraduationCap,
+    award: Award,
+    star: Star,
+    code: Code,
+    fileText: FileText,
+    download: Download,
+    maximize2: Maximize2,
+    linkedin: Linkedin,
+    bold: Bold,
+    italic: Italic,
+    list: List,
+    heading: Heading
+  };
+
   const insertMarkdown = (prefix: string, suffix: string = "") => {
     const textarea = document.querySelector("textarea");
     if (!textarea) return;
@@ -32,6 +54,11 @@ export function MarkdownEditor({ value, onChange }: MarkdownEditorProps) {
         end + prefix.length
       );
     }, 0);
+  };
+
+  const insertIcon = (iconName: string) => {
+    insertMarkdown(`${iconName} `);
+    setShowIconsDropdown(false);
   };
 
   return (
@@ -69,10 +96,37 @@ export function MarkdownEditor({ value, onChange }: MarkdownEditorProps) {
         >
           <List className="w-4 h-4" />
         </Button>
+
+        <div className="relative">
+          <Button
+            variant="outline"
+            size="sm"
+            onClick={() => setShowIconsDropdown(!showIconsDropdown)}
+            title="Insert Icon"
+          >
+            <FileText className="w-4 h-4" />
+          </Button>
+          
+          {showIconsDropdown && (
+            <div className="absolute z-10 mt-2 w-48 bg-white dark:bg-gray-800 rounded-md shadow-lg border border-gray-200 dark:border-gray-700">
+              <div className="p-2 grid grid-cols-3 gap-1">
+                {Object.entries(icons).map(([name, IconComponent]) => (
+                  <button
+                    key={name}
+                    className="p-2 hover:bg-gray-100 dark:hover:bg-gray-700 rounded-md flex items-center justify-center"
+                    onClick={() => insertIcon(`📎`)}
+                    title={name}
+                  >
+                    <IconComponent className="w-4 h-4" />
+                  </button>
+                ))}
+              </div>
+            </div>
+          )}
+        </div>
       </div>
 
       <Textarea
-      
         value={value}
         onChange={(e) => onChange(e.target.value)}
         className="min-h-[600px] h-full font-mono text-base leading-relaxed resize-none focus:ring-2 focus:ring-purple-500"
