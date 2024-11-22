@@ -75,7 +75,25 @@ export default function RootLayout({
         <link rel="apple-touch-icon" href="/logo.png" />
         <link rel="manifest" href="/manifest.json" />
       </head>
-      <body className={inter.className}>{children}</body>
+      <body className={inter.className}>
+        {children}
+        <footer className="text-center py-8 mt-auto bg-gradient-to-r from-indigo-50 to-purple-50 dark:from-gray-900 dark:to-gray-800">
+          <div className="container mx-auto px-4">
+          Powered by {" "}
+            <a 
+              href="https://omtunlabs.com" 
+              target="_blank" 
+              rel="noopener noreferrer"
+              className="text-gray-600 dark:text-gray-400 hover:text-purple-600 dark:hover:text-purple-400 transition-colors duration-300 font-medium"
+            >
+               OmtunLabs
+            </a>
+            <p className="text-sm text-gray-500 dark:text-gray-500 mt-2">
+              © {new Date().getFullYear()} All rights reserved.
+            </p>
+          </div>
+        </footer>
+      </body>
     </html>
   );
 }
